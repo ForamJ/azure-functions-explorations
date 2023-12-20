@@ -1,4 +1,4 @@
-# Assignment 3
+# Assignment 3  - Service Bus
 ```sh
 func start
 
@@ -205,3 +205,140 @@ EmployeeID,Name,DOB,Position
 9854,ERF XYC,06/08/1992,MLE
 ```
 
+
+# Assignment 3  - Event Hub
+
+1. Create event hub through Azure Portal
+- AddEmployeeDetails_EventHub
+- DeleteEmployeeDetails_EventHub
+
+2. Create Event Hub trigger function in VS code for each.
+
+3. Update local.settings.json to include EventHub Connection string. 
+
+4. run `func start`
+
+```sh
+func start
+
+Found Python version 3.8.16 (python3).
+
+Azure Functions Core Tools
+Core Tools Version:       4.0.5441 Commit hash: N/A  (64-bit)
+Function Runtime Version: 4.25.3.21264
+
+[2023-12-20T06:55:38.293Z] Worker process started and initialized.
+
+Functions:
+
+        Employee_ServiceBus: [GET,POST] http://localhost:7071/api/Employee_ServiceBus
+
+        AddEmployeedetails_EventHub: eventHubTrigger
+
+        AddEmployeeDetails_ServiceBus: serviceBusTrigger
+
+        DeleteEmployeedetails_EventHub: eventHubTrigger
+
+        DeleteEmployeeDetails_ServiceBus: serviceBusTrigger
+```
+
+5. Generate Data for each event hub 
+Output of Add Employee Event
+```sh
+[2023-12-20T07:10:37.150Z] Host lock lease acquired by instance ID '0000000000000000000000007053F404'.
+[2023-12-20T07:10:39.203Z] Executing 'Functions.AddEmployeedetails_EventHub' (Reason='(null)', Id=d2e5da87-19b7-4abd-8da4-0a665a2d2fd8)
+[2023-12-20T07:10:39.204Z] Trigger Details: PartionId: 0, Offset: 672-912, EnqueueTimeUtc: 2023-12-20T07:06:32.4490000+00:00-2023-12-20T07:10:00.7950000+00:00, SequenceNumber: 3-4, Count: 2
+[2023-12-20T07:10:39.276Z] Python EventHub trigger processed an event: [{"EmployeeID": 3555, "Name": "John Dave", "DOB": "12/12/1865", "Position": "Lead MLE"}]
+[2023-12-20T07:10:39.276Z] Python EventHub trigger processed an event: [{"EmployeeID": 3555, "Name": "John Dave", "DOB": "12/12/1865", "Position": "Lead MLE"}]
+[2023-12-20T07:10:39.280Z] Employee details added: EmployeeID=3555, Name=John Dave, DOB=12/12/1865, Position=Lead MLE
+[2023-12-20T07:10:39.280Z] Employee details added: EmployeeID=3555, Name=John Dave, DOB=12/12/1865, Position=Lead MLE
+[2023-12-20T07:10:39.315Z] Executed 'Functions.AddEmployeedetails_EventHub' (Succeeded, Id=d2e5da87-19b7-4abd-8da4-0a665a2d2fd8, Duration=136ms)
+```
+
+Output of CSV
+```
+3450,Foram Jivani,09/12/1991,MLE
+3485,Abc XYC,01/01/1990,Sr MLE
+3330,Def XYC,01/02/1996,Analyst
+3200,ERF XYC,06/08/1992,MLE
+2009,Abc XYC,01/01/1990,Sr MLE
+2008,Def XYC,01/02/1996,Analyst
+2001,ERF XYC,06/08/1992,MLE
+2010,Abc XYC,01/01/1990,Sr MLE
+1010,Def XYC,01/02/1996,Analyst
+1100,ERF XYC,06/08/1992,MLE
+5200,Abc XYC,01/01/1990,Sr MLE
+2586,Def XYC,01/02/1996,Analyst
+9874,ERF XYC,06/08/1992,MLE
+1111,ERF XYC,06/08/1992,MLE
+5598,Abc XYC,01/01/1990,Sr MLE
+7845,Def XYC,01/02/1996,Analyst
+9854,ERF XYC,06/08/1992,MLE
+3555,John Dave,12/12/1865,Lead MLE
+3555,John Dave,12/12/1865,Lead MLE
+```
+
+
+Output of Delete Employee Event
+```sh
+[2023-12-20T06:55:42.819Z] Host lock lease acquired by instance ID '0000000000000000000000007053F404'.
+[2023-12-20T06:55:44.851Z] Executing 'Functions.DeleteEmployeedetails_EventHub' (Reason='(null)', Id=f6866dd0-8acd-4412-8dd5-fa29d38f3174)
+[2023-12-20T06:55:44.852Z] Trigger Details: PartionId: 0, Offset: 0-0, EnqueueTimeUtc: 2023-12-20T06:53:03.1000000+00:00-2023-12-20T06:53:03.1000000+00:00, SequenceNumber: 0-0, Count: 1
+[2023-12-20T06:55:44.930Z] Python EventHub trigger processed an event: [{"EmployeeID": "3555"}]
+[2023-12-20T06:55:44.938Z] deleted data ..................... {'EmployeeID': '3555', 'Name': 'John Dave', 'DOB': '12/12/1865', 'Position': 'Lead MLE'}
+[2023-12-20T06:55:44.938Z] deleted data ..................... {'EmployeeID': '3555', 'Name': 'John Dave', 'DOB': '12/12/1865', 'Position': 'Lead MLE'}
+[2023-12-20T06:55:44.939Z] Employee details deleted: EmployeeID=3555
+[2023-12-20T06:55:44.976Z] Executed 'Functions.DeleteEmployeedetails_EventHub' (Succeeded, Id=f6866dd0-8acd-4412-8dd5-fa29d38f3174, Duration=156ms)
+[2023-12-20T06:55:52.341Z] Executing 'Functions.DeleteEmployeedetails_EventHub' (Reason='(null)', Id=8c53b653-029e-470e-b5de-3e5d04e8d895)
+[2023-12-20T06:55:52.341Z] Trigger Details: PartionId: 0, Offset: 152-152, EnqueueTimeUtc: 2023-12-20T06:55:14.2570000+00:00-2023-12-20T06:55:14.2570000+00:00, SequenceNumber: 1-1, Count: 1
+[2023-12-20T06:55:52.348Z] Python EventHub trigger processed an event: [{"EmployeeID": "3555"}]
+[2023-12-20T06:55:52.358Z] Error processing event: 'EmployeeID'
+[2023-12-20T06:55:52.359Z] Executed 'Functions.DeleteEmployeedetails_EventHub' (Succeeded, Id=8c53b653-029e-470e-b5de-3e5d04e8d895, Duration=19ms)
+```
+
+Output of CSV 
+```
+3450,Foram Jivani,09/12/1991,MLE
+3485,Abc XYC,01/01/1990,Sr MLE
+3330,Def XYC,01/02/1996,Analyst
+3200,ERF XYC,06/08/1992,MLE
+2009,Abc XYC,01/01/1990,Sr MLE
+2008,Def XYC,01/02/1996,Analyst
+2001,ERF XYC,06/08/1992,MLE
+2010,Abc XYC,01/01/1990,Sr MLE
+1010,Def XYC,01/02/1996,Analyst
+1100,ERF XYC,06/08/1992,MLE
+5200,Abc XYC,01/01/1990,Sr MLE
+2586,Def XYC,01/02/1996,Analyst
+9874,ERF XYC,06/08/1992,MLE
+1111,ERF XYC,06/08/1992,MLE
+5598,Abc XYC,01/01/1990,Sr MLE
+7845,Def XYC,01/02/1996,Analyst
+9854,ERF XYC,06/08/1992,MLE
+```
+
+
+POST request :
+
+Add Employee Event Hub:
+
+`http://localhost:7071/api/Employee_EventHub?Operation=AddEmployee`
+with following json body
+```
+{
+    "EmployeeID": 99999,
+    "Name": "David John",
+    "DOB": "15/08/1996",
+    "Position": "Analyst"
+}
+```
+
+Delete Employee Event Hub:
+
+`http://localhost:7071/api/Employee_EventHub?Operation=DeleteEmployee`
+with following json body
+```
+{
+    "EmployeeID": 99999
+}
+```
